@@ -1,6 +1,5 @@
 package com.juniorjainsahab.newsapp.adapter
 
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,17 +7,21 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.juniorjainsahab.newsapp.R
+import com.juniorjainsahab.newsapp.activity.ArticlesActivity
 import com.juniorjainsahab.newsapp.model.Articles
 import com.squareup.picasso.Picasso
-import java.net.URL
 
-class ArticlesAdapter(private val articles: List<Articles>) :
+class ArticlesAdapter(
+    private val articles: List<Articles>,
+    private val listener: View.OnClickListener
+) :
     RecyclerView.Adapter<ArticlesAdapter.ArticlesViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.news_list_view_item, parent, false)
+        view.setOnClickListener(listener)
         return ArticlesViewHolder(view)
     }
 
