@@ -50,6 +50,7 @@
 
 
         <Button
+            android:id="@+id/know_more_button"
             style="@style/KnowMoreButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
