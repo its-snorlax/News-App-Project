@@ -7,7 +7,6 @@ class Articles(
     internal var title: String,
     internal var urlToImage: String,
     internal var description: String,
-    internal var url: String,
-    internal var content: String
+    internal var url: String
 ) : Serializable {
 }

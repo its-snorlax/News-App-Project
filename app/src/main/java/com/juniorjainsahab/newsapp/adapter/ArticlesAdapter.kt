@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.juniorjainsahab.newsapp.R
-import com.juniorjainsahab.newsapp.activity.ArticlesActivity
 import com.juniorjainsahab.newsapp.model.Articles
 import com.squareup.picasso.Picasso
 
