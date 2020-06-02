@@ -32,7 +32,7 @@ class ArticleDetailActivity : AppCompatActivity() {
 
         Picasso.get().load(activityContent.urlToImage).resize(
             Resources.getSystem().displayMetrics.widthPixels,
-            Resources.getSystem().displayMetrics.widthPixels
+            Resources.getSystem().displayMetrics.widthPixels / 2
         ).into(imageView)
         titleTextView.text = activityContent.title
         descriptionTextView.text = activityContent.description

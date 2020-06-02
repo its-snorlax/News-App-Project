@@ -1,5 +1,6 @@
 package com.juniorjainsahab.newsapp.adapter
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +32,10 @@ class ArticlesAdapter(
     override fun onBindViewHolder(holder: ArticlesViewHolder, position: Int) {
         val currentArticle = articles[position]
         holder.titleTextView.text = currentArticle.title
-        Picasso.get().load(currentArticle.urlToImage).into(holder.imageView)
+        Picasso.get().load(currentArticle.urlToImage).resize(
+            Resources.getSystem().displayMetrics.widthPixels,
+            Resources.getSystem().displayMetrics.widthPixels / 2
+        ).into(holder.imageView)
     }
 
     class ArticlesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
