@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import com.juniorjainsahab.newsapp.R
 import com.juniorjainsahab.newsapp.model.Articles
@@ -23,12 +24,13 @@ class ArticleDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article_detail)
-
         activityContent = intent.getSerializableExtra("activityContent") as Articles
         imageView = findViewById(R.id.image_view)
         titleTextView = findViewById(R.id.title_text_view)
         descriptionTextView = findViewById(R.id.description_text_view)
         knowMoreButton = findViewById(R.id.know_more_button)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         Picasso.get().load(activityContent.urlToImage).resize(
             Resources.getSystem().displayMetrics.widthPixels,
@@ -41,5 +43,10 @@ class ArticleDetailActivity : AppCompatActivity() {
             intent.putExtra("url", activityContent.url)
             startActivity(intent)
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
