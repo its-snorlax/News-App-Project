@@ -60,10 +60,19 @@ class ArticleDetailActivity : AppCompatActivity(), MenuItem.OnMenuItemClickListe
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         when (item?.itemId) {
             share -> {
-                Toast.makeText(this,"click",Toast.LENGTH_SHORT).show()
+                share()
                 return true
             }
         }
         return false
+    }
+
+    private fun share() {
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, activityContent.url + "\n" + activityContent.title)
+            type = "text/plain"
+        }
+        startActivity(Intent.createChooser(shareIntent, "Share this Article"))
     }
 }
