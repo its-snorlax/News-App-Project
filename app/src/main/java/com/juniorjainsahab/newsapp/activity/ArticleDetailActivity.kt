@@ -3,17 +3,18 @@ package com.juniorjainsahab.newsapp.activity
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toolbar
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.juniorjainsahab.newsapp.R
+import com.juniorjainsahab.newsapp.R.id.share
+import com.juniorjainsahab.newsapp.R.menu.activity_article_detail_menu
 import com.juniorjainsahab.newsapp.model.Articles
 import com.squareup.picasso.Picasso
 
-class ArticleDetailActivity : AppCompatActivity() {
+class ArticleDetailActivity : AppCompatActivity(), MenuItem.OnMenuItemClickListener {
 
     private lateinit var activityContent: Articles
     private lateinit var imageView: ImageView
@@ -48,5 +49,21 @@ class ArticleDetailActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(activity_article_detail_menu, menu)
+        menu?.findItem(share)?.setOnMenuItemClickListener(this)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            share -> {
+                Toast.makeText(this,"click",Toast.LENGTH_SHORT).show()
+                return true
+            }
+        }
+        return false
     }
 }
