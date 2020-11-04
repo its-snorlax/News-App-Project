@@ -32,10 +32,12 @@ class ArticlesAdapter(
     override fun onBindViewHolder(holder: ArticlesViewHolder, position: Int) {
         val currentArticle = articles[position]
         holder.titleTextView.text = currentArticle.title
-        Picasso.get().load(currentArticle.urlToImage).resize(
-            Resources.getSystem().displayMetrics.widthPixels,
-            Resources.getSystem().displayMetrics.widthPixels / 2
-        ).into(holder.imageView)
+        if (currentArticle.urlToImage != null && currentArticle.urlToImage.isNotEmpty()) {
+            Picasso.get().load(currentArticle.urlToImage).resize(
+                Resources.getSystem().displayMetrics.widthPixels,
+                Resources.getSystem().displayMetrics.widthPixels / 2
+            ).into(holder.imageView)
+        }
     }
 
     class ArticlesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

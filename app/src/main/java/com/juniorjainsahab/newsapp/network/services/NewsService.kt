@@ -13,4 +13,10 @@ interface NewsService {
         @Query("country") param1: String,
         @Query("apiKey") param2: String
     ): Call<NewsModel>
+
+    @GET("v2/everything")
+    fun getSearchResults(
+        @Query("q") param1: String,
+        @Query("apiKey") param2: String
+    ): Call<NewsModel>
 }
