@@ -1,5 +1,6 @@
 package com.juniorjainsahab.newsapp.activity
 
+import android.R.anim.slide_in_left
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -16,7 +17,7 @@ import com.juniorjainsahab.newsapp.fragment.ArticlesFragment
 import com.juniorjainsahab.newsapp.fragment.SearchFragment
 
 
-class ArticlesActivity : AppCompatActivity(), OnMenuItemClickListener {
+class ArticlesActivity : AppCompatActivity() {
 
     private lateinit var fragmentContainer: FrameLayout
 
@@ -46,15 +47,12 @@ class ArticlesActivity : AppCompatActivity(), OnMenuItemClickListener {
         val searchMenu = menu!!.findItem(action_search)
         searchMenu.setOnMenuItemClickListener {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
+            fragmentTransaction.setTransitionStyle(slide_in_left)
             fragmentTransaction.replace(fragment_container, searchFragment)
             fragmentTransaction.addToBackStack("true")
             fragmentTransaction.commit()
             true
         }
         return super.onPrepareOptionsMenu(menu)
-    }
-
-    override fun onMenuItemClick(item: MenuItem?): Boolean {
-        TODO("Not yet implemented")
     }
 }

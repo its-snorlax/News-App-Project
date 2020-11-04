@@ -1,6 +1,7 @@
 package com.juniorjainsahab.newsapp.presenter
 
 import com.juniorjainsahab.newsapp.model.NewsModel
+import com.juniorjainsahab.newsapp.network.ApiParam
 import com.juniorjainsahab.newsapp.network.services.NewsService
 import com.juniorjainsahab.newsapp.view.SearchFragmentView
 import retrofit2.Call
@@ -13,7 +14,7 @@ class SearchActivityPresenter(
 ) {
     fun search(newText: String) {
         searchFragmentView.showProgressBar()
-        searchService.getSearchResults(newText, "7cb8b3ac7c4745b5a8ba6f50becde20d")
+        searchService.getSearchResults(newText, ApiParam.API_KEY)
             .enqueue(object : Callback<NewsModel> {
                 override fun onFailure(call: Call<NewsModel>, t: Throwable) {
                     searchFragmentView.onFail()
