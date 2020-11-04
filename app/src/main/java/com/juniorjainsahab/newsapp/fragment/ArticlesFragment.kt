@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -11,6 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.juniorjainsahab.newsapp.R
+import com.juniorjainsahab.newsapp.R.id.list_view
+import com.juniorjainsahab.newsapp.R.id.progress_bar
+import com.juniorjainsahab.newsapp.R.layout.fragment_articles
 import com.juniorjainsahab.newsapp.activity.ArticleDetailActivity
 import com.juniorjainsahab.newsapp.adapter.ArticlesAdapter
 import com.juniorjainsahab.newsapp.model.Articles
@@ -31,13 +36,13 @@ class ArticlesFragment : Fragment(), NewsActivityView, View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_articles, container, false)
+        return inflater.inflate(fragment_articles, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        progressBar = view.findViewById(R.id.progress_bar)
-        recyclerView = view.findViewById(R.id.list_view)
+        progressBar = view.findViewById(progress_bar)
+        recyclerView = view.findViewById(list_view)
 
         NewsActivityPresenter(this, ServiceBuilder.build(NewsService::class.java)).getArticles()
     }
@@ -56,11 +61,11 @@ class ArticlesFragment : Fragment(), NewsActivityView, View.OnClickListener {
     }
 
     override fun showProgressBar() {
-        progressBar.visibility = View.VISIBLE
+        progressBar.visibility = VISIBLE
     }
 
     override fun hideProgressBar() {
-        progressBar.visibility = View.GONE
+        progressBar.visibility = GONE
     }
 
     override fun onClick(v: View?) {
