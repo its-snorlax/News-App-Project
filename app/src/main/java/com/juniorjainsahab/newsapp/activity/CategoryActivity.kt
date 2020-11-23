@@ -1,5 +1,6 @@
 package com.juniorjainsahab.newsapp.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -8,58 +9,75 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.juniorjainsahab.newsapp.R
 
-class CategoryActivity : AppCompatActivity() {
+class CategoryActivity : AppCompatActivity(), View.OnClickListener {
+    private lateinit var topNews: View
+    private lateinit var technology: View
+    private lateinit var science: View
+    private lateinit var finance: View
+    private lateinit var entertainment: View
+    private lateinit var sports: View
+    private lateinit var health: View
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
+        bindingViews()
         updateBackGroundAndHeadings()
+
+        topNews.setOnClickListener(this)
+    }
+
+    private fun bindingViews() {
+        topNews = findViewById<View>(R.id.top_news)
+        technology = findViewById<LinearLayout>(R.id.category_one).findViewById<View>(R.id.tech)
+        science = findViewById<LinearLayout>(R.id.category_one).findViewById<View>(R.id.science)
+        finance = findViewById<LinearLayout>(R.id.category_two).findViewById<View>(R.id.finance)
+        entertainment =
+            findViewById<LinearLayout>(R.id.category_two).findViewById<View>(R.id.entertainment)
+        sports = findViewById<LinearLayout>(R.id.category_three).findViewById<View>(R.id.sports)
+        health = findViewById<LinearLayout>(R.id.category_three).findViewById<View>(R.id.health)
     }
 
     private fun updateBackGroundAndHeadings() {
-        findViewById<View>(R.id.top_news).findViewById<TextView>(R.id.category_heading).text =
-            getString(R.string.top_news)
-        findViewById<View>(R.id.top_news).findViewById<ImageView>(R.id.category_image)
+        topNews.findViewById<TextView>(R.id.category_heading).text = getString(R.string.top_news)
+        topNews.findViewById<ImageView>(R.id.category_image)
             .setImageDrawable(getDrawable(R.drawable.top_news))
 
-        findViewById<LinearLayout>(R.id.category_one).findViewById<View>(R.id.tech)
-            .findViewById<TextView>(R.id.category_heading).text = getString(R.string.technology)
-        findViewById<LinearLayout>(R.id.category_one).findViewById<View>(R.id.tech)
-            .findViewById<ImageView>(R.id.category_image)
+        technology.findViewById<TextView>(R.id.category_heading).text =
+            getString(R.string.technology)
+        technology.findViewById<ImageView>(R.id.category_image)
             .setImageDrawable(getDrawable(R.drawable.technology))
 
-        findViewById<LinearLayout>(R.id.category_one).findViewById<View>(R.id.science)
-            .findViewById<TextView>(R.id.category_heading).text = getString(R.string.science)
-        findViewById<LinearLayout>(R.id.category_one).findViewById<View>(R.id.science)
-            .findViewById<ImageView>(R.id.category_image)
+        science.findViewById<TextView>(R.id.category_heading).text = getString(R.string.science)
+        science.findViewById<ImageView>(R.id.category_image)
             .setImageDrawable(getDrawable(R.drawable.science))
 
 
-        findViewById<LinearLayout>(R.id.category_two).findViewById<View>(R.id.finance)
-            .findViewById<TextView>(R.id.category_heading).text = getString(R.string.finance)
-        findViewById<LinearLayout>(R.id.category_two).findViewById<View>(R.id.finance)
-            .findViewById<ImageView>(R.id.category_image)
+        finance.findViewById<TextView>(R.id.category_heading).text = getString(R.string.finance)
+        finance.findViewById<ImageView>(R.id.category_image)
             .setImageDrawable(getDrawable(R.drawable.finance))
 
 
-
-        findViewById<LinearLayout>(R.id.category_two).findViewById<View>(R.id.entertainment)
+        entertainment
             .findViewById<TextView>(R.id.category_heading).text = "Entertainment"
-        findViewById<LinearLayout>(R.id.category_two).findViewById<View>(R.id.entertainment)
+        entertainment
             .findViewById<ImageView>(R.id.category_image)
             .setImageDrawable(getDrawable(R.drawable.entertainment))
 
 
-        findViewById<LinearLayout>(R.id.category_three).findViewById<View>(R.id.sports)
-            .findViewById<TextView>(R.id.category_heading).text = "Sports"
-        findViewById<LinearLayout>(R.id.category_three).findViewById<View>(R.id.sports)
-            .findViewById<ImageView>(R.id.category_image)
+        sports.findViewById<TextView>(R.id.category_heading).text = "Sports"
+        sports.findViewById<ImageView>(R.id.category_image)
             .setImageDrawable(getDrawable(R.drawable.sports))
 
 
-        findViewById<LinearLayout>(R.id.category_three).findViewById<View>(R.id.health)
-            .findViewById<TextView>(R.id.category_heading).text = "Health"
-        findViewById<LinearLayout>(R.id.category_three).findViewById<View>(R.id.health)
-            .findViewById<ImageView>(R.id.category_image)
+        health.findViewById<TextView>(R.id.category_heading).text = "Health"
+        health.findViewById<ImageView>(R.id.category_image)
             .setImageDrawable(getDrawable(R.drawable.health))
+    }
+
+    override fun onClick(v: View?) {
+        when (v) {
+            topNews -> startActivity(Intent(this, ArticlesActivity::class.java))
+        }
     }
 }
