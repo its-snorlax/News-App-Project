@@ -3,4 +3,8 @@
     <string name="know_more">Know More</string>
     <string name="share">Share</string>
     <string name="search">Search</string>
+    <string name="top_news">Top News</string>
+    <string name="technology">Technology</string>
+    <string name="science">Science</string>
+    <string name="finance">Finance</string>
 </resources>
