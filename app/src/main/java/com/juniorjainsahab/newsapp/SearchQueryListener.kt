@@ -15,7 +15,6 @@ class SearchQueryListener(private val searchFragmentView: SearchFragmentView) :
                 .search(query)
         }
         return true
-
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {

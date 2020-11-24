@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.juniorjainsahab.newsapp.R
 import com.juniorjainsahab.newsapp.R.id.list_view
 import com.juniorjainsahab.newsapp.R.id.progress_bar
 import com.juniorjainsahab.newsapp.R.layout.fragment_articles

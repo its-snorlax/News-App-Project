@@ -17,10 +17,12 @@ class SearchActivityPresenter(
         searchService.getSearchResults(newText, ApiParam.API_KEY)
             .enqueue(object : Callback<NewsModel> {
                 override fun onFailure(call: Call<NewsModel>, t: Throwable) {
+                    searchFragmentView.hideProgressBar()
                     searchFragmentView.onFail()
                 }
 
                 override fun onResponse(call: Call<NewsModel>, response: Response<NewsModel>) {
+                    searchFragmentView.hideProgressBar()
                     if (response.isSuccessful) {
                         searchFragmentView.onSuccess(response.body())
                         return
@@ -28,6 +30,5 @@ class SearchActivityPresenter(
                     searchFragmentView.onFail()
                 }
             })
-        searchFragmentView.hideProgressBar()
     }
 }

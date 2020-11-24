@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -11,13 +12,15 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.juniorjainsahab.newsapp.R
+import com.juniorjainsahab.newsapp.R.id.list_view
+import com.juniorjainsahab.newsapp.R.id.progress_bar
 import com.juniorjainsahab.newsapp.activity.ArticleDetailActivity
 import com.juniorjainsahab.newsapp.adapter.ArticlesAdapter
 import com.juniorjainsahab.newsapp.model.Articles
 import com.juniorjainsahab.newsapp.model.NewsModel
 import com.juniorjainsahab.newsapp.view.SearchFragmentView
 
-class SearchFragment : Fragment(), SearchFragmentView, View.OnClickListener {
+class SearchFragment : Fragment(), SearchFragmentView, OnClickListener {
 
     private lateinit var progressBar: ProgressBar
     private lateinit var recyclerView: RecyclerView
@@ -33,8 +36,8 @@ class SearchFragment : Fragment(), SearchFragmentView, View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        progressBar = view.findViewById(R.id.progress_bar)
-        recyclerView = view.findViewById(R.id.list_view)
+        progressBar = view.findViewById(progress_bar)
+        recyclerView = view.findViewById(list_view)
     }
 
     override fun onSuccess(newsModel: NewsModel?) {
@@ -44,11 +47,10 @@ class SearchFragment : Fragment(), SearchFragmentView, View.OnClickListener {
             recyclerView.layoutManager = LinearLayoutManager(context);
             recyclerView.adapter = articlesAdapter
         }
-
     }
 
     override fun showProgressBar() {
-        progressBar.visibility = View.VISIBLE
+        progressBar.visibility = VISIBLE
     }
 
     override fun onFail() {
@@ -56,7 +58,7 @@ class SearchFragment : Fragment(), SearchFragmentView, View.OnClickListener {
     }
 
     override fun hideProgressBar() {
-        progressBar.visibility = View.GONE
+        progressBar.visibility = GONE
     }
 
     override fun onClick(v: View?) {
