@@ -66,18 +66,18 @@ class CategorySelectionActivity : AppCompatActivity(), View.OnClickListener {
 
 
         entertainment
-            .findViewById<TextView>(R.id.category_heading).text = "Entertainment"
+            .findViewById<TextView>(R.id.category_heading).text = getString(R.string.entertainment)
         entertainment
             .findViewById<ImageView>(R.id.category_image)
             .setImageDrawable(getDrawable(R.drawable.entertainment))
 
 
-        sports.findViewById<TextView>(R.id.category_heading).text = "Sports"
+        sports.findViewById<TextView>(R.id.category_heading).text = getString(R.string.sports)
         sports.findViewById<ImageView>(R.id.category_image)
             .setImageDrawable(getDrawable(R.drawable.sports))
 
 
-        health.findViewById<TextView>(R.id.category_heading).text = "Health"
+        health.findViewById<TextView>(R.id.category_heading).text = getString(R.string.health)
         health.findViewById<ImageView>(R.id.category_image)
             .setImageDrawable(getDrawable(R.drawable.health))
     }
@@ -85,12 +85,12 @@ class CategorySelectionActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v) {
             topNews -> startActivity(Intent(this, ArticlesActivity::class.java))
-            technology -> openActivity("Technology")
-            science -> openActivity("Science")
-            finance -> openActivity("Finance")
-            entertainment -> openActivity("Entertainment")
-            sports -> openActivity("Sports")
-            health -> openActivity("Health")
+            technology -> openActivity(getString(R.string.technology))
+            science -> openActivity(getString(R.string.science))
+            finance -> openActivity(getString(R.string.finance))
+            entertainment -> openActivity(getString(R.string.entertainment))
+            sports -> openActivity(getString(R.string.sports))
+            health -> openActivity(getString(R.string.health))
         }
     }
 
