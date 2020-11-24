@@ -5,6 +5,6 @@ import com.juniorjainsahab.newsapp.model.NewsModel
 interface SearchFragmentView {
     fun showProgressBar()
     fun onFail()
-    fun onSuccess(body: NewsModel?)
+    fun onSuccess(newsModel: NewsModel?)
     fun hideProgressBar()
 }

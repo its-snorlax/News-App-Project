@@ -13,16 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ArticlesActivity"></activity>
-        <activity android:name=".activity.ArticleDetailActivity" />
-        <activity android:name=".activity.CustomWebView" />
-        <activity android:name=".activity.CategoryActivity">
+        <activity android:name=".activity.CategorySelectionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.ArticlesActivity"/>
+        <activity android:name=".activity.ArticleDetailActivity" />
+        <activity android:name=".activity.CustomWebView" />
+        <activity android:name=".activity.CategoryArticlesActivity"/>
     </application>
 
 </manifest>

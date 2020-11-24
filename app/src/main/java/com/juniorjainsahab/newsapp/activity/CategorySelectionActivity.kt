@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.juniorjainsahab.newsapp.R
 import com.juniorjainsahab.newsapp.R.layout.activity_category
 
-class CategoryActivity : AppCompatActivity(), View.OnClickListener {
+class CategorySelectionActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var topNews: View
     private lateinit var technology: View
     private lateinit var science: View
@@ -26,6 +26,12 @@ class CategoryActivity : AppCompatActivity(), View.OnClickListener {
         updateBackGroundAndHeadings()
 
         topNews.setOnClickListener(this)
+        technology.setOnClickListener(this)
+        science.setOnClickListener(this)
+        finance.setOnClickListener(this)
+        entertainment.setOnClickListener(this)
+        sports.setOnClickListener(this)
+        health.setOnClickListener(this)
     }
 
     private fun bindingViews() {
@@ -79,6 +85,18 @@ class CategoryActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v) {
             topNews -> startActivity(Intent(this, ArticlesActivity::class.java))
+            technology -> openActivity("Technology")
+            science -> openActivity("Science")
+            finance -> openActivity("Finance")
+            entertainment -> openActivity("Entertainment")
+            sports -> openActivity("Sports")
+            health -> openActivity("Health")
         }
+    }
+
+    private fun openActivity(catName: String) {
+        val intent = Intent(this, CategoryArticlesActivity::class.java)
+        intent.putExtra("categoryName", catName)
+        startActivity(intent)
     }
 }
