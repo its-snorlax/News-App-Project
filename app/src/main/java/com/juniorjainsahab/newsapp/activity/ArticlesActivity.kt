@@ -31,7 +31,6 @@ class ArticlesActivity : AppCompatActivity() {
 
         val beginTransaction = supportFragmentManager.beginTransaction()
         beginTransaction.replace(fragment_container, ArticlesFragment())
-        beginTransaction.addToBackStack(null)
         beginTransaction.commit();
     }
 

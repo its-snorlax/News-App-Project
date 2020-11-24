@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.juniorjainsahab.newsapp.R
+import com.juniorjainsahab.newsapp.R.layout.activity_category
 
 class CategoryActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var topNews: View
@@ -20,7 +21,7 @@ class CategoryActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_category)
+        setContentView(activity_category)
         bindingViews()
         updateBackGroundAndHeadings()
 
