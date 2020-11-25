@@ -29,11 +29,12 @@ class CategoryArticlesActivity : AppCompatActivity(), SearchFragmentView, View.O
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(fragment_articles)
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         recyclerView = findViewById(R.id.list_view)
         progressBar = findViewById(R.id.progress_bar)
 
         val categoryName = intent.getStringExtra("categoryName")
+        supportActionBar?.title = categoryName
         SearchActivityPresenter(this, ServiceBuilder.build(NewsService::class.java))
             .search(categoryName)
     }
@@ -73,4 +74,8 @@ class CategoryArticlesActivity : AppCompatActivity(), SearchFragmentView, View.O
         startActivity(intent)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 }

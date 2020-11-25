@@ -3,8 +3,6 @@ package com.juniorjainsahab.newsapp.activity
 import android.R.anim.slide_in_left
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
-import android.view.MenuItem.OnMenuItemClickListener
 import android.widget.FrameLayout
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +10,7 @@ import com.juniorjainsahab.newsapp.R.id.action_search
 import com.juniorjainsahab.newsapp.R.id.fragment_container
 import com.juniorjainsahab.newsapp.R.layout.activity_main
 import com.juniorjainsahab.newsapp.R.menu.articles_actvity_menu
+import com.juniorjainsahab.newsapp.R.string.top_news
 import com.juniorjainsahab.newsapp.SearchQueryListener
 import com.juniorjainsahab.newsapp.fragment.ArticlesFragment
 import com.juniorjainsahab.newsapp.fragment.SearchFragment
@@ -26,6 +25,8 @@ class ArticlesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activity_main)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = resources.getString(top_news)
         fragmentContainer = findViewById(fragment_container)
         searchFragment = SearchFragment()
 
@@ -53,5 +54,10 @@ class ArticlesActivity : AppCompatActivity() {
             true
         }
         return super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
