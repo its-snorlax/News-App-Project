@@ -1,18 +1,25 @@
 package com.juniorjainsahab.newsapp.activity
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.os.AsyncTask
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.juniorjainsahab.newsapp.R
+import com.juniorjainsahab.newsapp.R.id.add_to_fav
 import com.juniorjainsahab.newsapp.R.id.share
 import com.juniorjainsahab.newsapp.R.menu.activity_article_detail_menu
+import com.juniorjainsahab.newsapp.db.AppDB
+import com.juniorjainsahab.newsapp.db.entity.ArticlesEntity
 import com.juniorjainsahab.newsapp.model.Articles
 import com.squareup.picasso.Picasso
+
 
 class ArticleDetailActivity : AppCompatActivity(), MenuItem.OnMenuItemClickListener {
 
@@ -54,6 +61,7 @@ class ArticleDetailActivity : AppCompatActivity(), MenuItem.OnMenuItemClickListe
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(activity_article_detail_menu, menu)
         menu?.findItem(share)?.setOnMenuItemClickListener(this)
+        menu?.findItem(add_to_fav)?.setOnMenuItemClickListener(this)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -63,8 +71,16 @@ class ArticleDetailActivity : AppCompatActivity(), MenuItem.OnMenuItemClickListe
                 share()
                 return true
             }
+            add_to_fav -> {
+                addToFavourite()
+                return true
+            }
         }
         return false
+    }
+
+    private fun addToFavourite() {
+        InsertionDBAsyncTask(applicationContext, activityContent).execute()
     }
 
     private fun share() {
@@ -74,5 +90,24 @@ class ArticleDetailActivity : AppCompatActivity(), MenuItem.OnMenuItemClickListe
             type = "text/plain"
         }
         startActivity(Intent.createChooser(shareIntent, "Share this Article"))
+    }
+
+    private class InsertionDBAsyncTask(
+        private val context: Context,
+        private val dbContent: Articles
+    ) :
+        AsyncTask<Void?, Void?, Int>() {
+        override fun doInBackground(vararg params: Void?): Int {
+            val dbInstance = AppDB.getDbInstance(context)
+            dbInstance.articlesDao().insertAll(
+                ArticlesEntity(
+                    title = dbContent.title,
+                    urlToImage = dbContent.urlToImage,
+                    url = dbContent.url,
+                    description = dbContent.description
+                )
+            )
+            return 0;
+        }
     }
 }
