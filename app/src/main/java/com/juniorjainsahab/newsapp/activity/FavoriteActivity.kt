@@ -1,5 +1,6 @@
 package com.juniorjainsahab.newsapp.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -41,6 +42,15 @@ class FavoriteActivity : AppCompatActivity(), OnExecuteListener {
             favArticles.map { Articles(it.title, it.urlToImage, it.description, it.url) }
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = ArticlesAdapter(articles,
-            View.OnClickListener { TODO("Not yet implemented") })
+            View.OnClickListener {
+                val activityContent = articles[recyclerView.getChildLayoutPosition(it)]
+                openArticleDetailActivity(activityContent)
+            })
+    }
+
+    private fun openArticleDetailActivity(activityContent: Articles) {
+        val intent = Intent(this, ArticleDetailActivity::class.java)
+        intent.putExtra("activityContent", activityContent)
+        startActivity(intent)
     }
 }
