@@ -10,4 +10,7 @@
     <string name="entertainment">Entertainment</string>
     <string name="sports">Sports</string>
     <string name="health">Health</string>
+    <string name="add_to_favorite">Add to favorite</string>
+    <string name="favorite_article">Favorite Articles</string>
+    <string name="you_have_no_saved_favorite">You have no saved Articles</string>
 </resources>

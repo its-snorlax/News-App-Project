@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.juniorjainsahab.newsapp.R
 import com.juniorjainsahab.newsapp.R.layout.activity_category
 
-class CategorySelectionActivity : AppCompatActivity(), View.OnClickListener {
+class CategoryActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var topNews: View
     private lateinit var technology: View
     private lateinit var science: View
@@ -18,6 +18,7 @@ class CategorySelectionActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var entertainment: View
     private lateinit var sports: View
     private lateinit var health: View
+    private lateinit var fav: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +33,7 @@ class CategorySelectionActivity : AppCompatActivity(), View.OnClickListener {
         entertainment.setOnClickListener(this)
         sports.setOnClickListener(this)
         health.setOnClickListener(this)
+        fav.setOnClickListener(this)
     }
 
     private fun bindingViews() {
@@ -43,6 +45,7 @@ class CategorySelectionActivity : AppCompatActivity(), View.OnClickListener {
             findViewById<LinearLayout>(R.id.category_two).findViewById<View>(R.id.entertainment)
         sports = findViewById<LinearLayout>(R.id.category_three).findViewById<View>(R.id.sports)
         health = findViewById<LinearLayout>(R.id.category_three).findViewById<View>(R.id.health)
+        fav = findViewById<View>(R.id.fav_articles)
     }
 
     private fun updateBackGroundAndHeadings() {
@@ -80,6 +83,11 @@ class CategorySelectionActivity : AppCompatActivity(), View.OnClickListener {
         health.findViewById<TextView>(R.id.category_heading).text = getString(R.string.health)
         health.findViewById<ImageView>(R.id.category_image)
             .setImageDrawable(getDrawable(R.drawable.health))
+
+        fav.findViewById<TextView>(R.id.category_heading).text =
+            getString(R.string.favorite_article)
+        fav.findViewById<ImageView>(R.id.category_image)
+            .setImageDrawable(getDrawable(R.drawable.ic_favorite))
     }
 
     override fun onClick(v: View?) {
@@ -91,6 +99,7 @@ class CategorySelectionActivity : AppCompatActivity(), View.OnClickListener {
             entertainment -> openActivity(getString(R.string.entertainment))
             sports -> openActivity(getString(R.string.sports))
             health -> openActivity(getString(R.string.health))
+            fav -> startActivity(Intent(this, FavoriteActivity::class.java))
         }
     }
 
