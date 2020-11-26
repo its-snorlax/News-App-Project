@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.CategorySelectionActivity">
+        <activity android:name=".activity.CategoryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,6 +24,7 @@
         <activity android:name=".activity.ArticleDetailActivity" />
         <activity android:name=".activity.CustomWebView" />
         <activity android:name=".activity.CategoryArticlesActivity"/>
+        <activity android:name=".activity.FavoriteActivity"/>
     </application>
 
 </manifest>

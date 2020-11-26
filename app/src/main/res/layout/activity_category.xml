@@ -106,5 +106,13 @@
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1" />
         </LinearLayout>
+
+        <include
+            android:id="@+id/fav_articles"
+            layout="@layout/category_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="5dp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,15 +1,14 @@
 package com.juniorjainsahab.newsapp.activity
 
-import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
-import android.os.AsyncTask
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.juniorjainsahab.newsapp.R
 import com.juniorjainsahab.newsapp.R.id.add_to_fav
@@ -17,12 +16,14 @@ import com.juniorjainsahab.newsapp.R.id.share
 import com.juniorjainsahab.newsapp.R.menu.activity_article_detail_menu
 import com.juniorjainsahab.newsapp.asyncTask
 import com.juniorjainsahab.newsapp.db.AppDB
+import com.juniorjainsahab.newsapp.db.OnExecuteListener
 import com.juniorjainsahab.newsapp.db.entity.ArticlesEntity
 import com.juniorjainsahab.newsapp.model.Articles
 import com.squareup.picasso.Picasso
 
 
-class ArticleDetailActivity : AppCompatActivity(), MenuItem.OnMenuItemClickListener {
+class ArticleDetailActivity : AppCompatActivity(), MenuItem.OnMenuItemClickListener,
+    OnExecuteListener {
 
     private lateinit var activityContent: Articles
     private lateinit var imageView: ImageView
@@ -81,7 +82,7 @@ class ArticleDetailActivity : AppCompatActivity(), MenuItem.OnMenuItemClickListe
     }
 
     private fun addToFavourite() {
-        asyncTask {
+        asyncTask({
             val dbInstance = AppDB.getDbInstance(applicationContext)
             dbInstance.articlesDao().insertAll(
                 ArticlesEntity(
@@ -91,7 +92,7 @@ class ArticleDetailActivity : AppCompatActivity(), MenuItem.OnMenuItemClickListe
                     description = activityContent.description
                 )
             )
-        }
+        }, this)
     }
 
     private fun share() {
@@ -101,5 +102,9 @@ class ArticleDetailActivity : AppCompatActivity(), MenuItem.OnMenuItemClickListe
             type = "text/plain"
         }
         startActivity(Intent.createChooser(shareIntent, "Share this Article"))
+    }
+
+    override fun onQuerySuccess() {
+        Toast.makeText(this, "Added to Favorite", Toast.LENGTH_LONG).show()
     }
 }
