@@ -15,6 +15,7 @@ import com.juniorjainsahab.newsapp.R
 import com.juniorjainsahab.newsapp.R.id.add_to_fav
 import com.juniorjainsahab.newsapp.R.id.share
 import com.juniorjainsahab.newsapp.R.menu.activity_article_detail_menu
+import com.juniorjainsahab.newsapp.asyncTask
 import com.juniorjainsahab.newsapp.db.AppDB
 import com.juniorjainsahab.newsapp.db.entity.ArticlesEntity
 import com.juniorjainsahab.newsapp.model.Articles
@@ -80,7 +81,17 @@ class ArticleDetailActivity : AppCompatActivity(), MenuItem.OnMenuItemClickListe
     }
 
     private fun addToFavourite() {
-        InsertionDBAsyncTask(applicationContext, activityContent).execute()
+        asyncTask {
+            val dbInstance = AppDB.getDbInstance(applicationContext)
+            dbInstance.articlesDao().insertAll(
+                ArticlesEntity(
+                    title = activityContent.title,
+                    urlToImage = activityContent.urlToImage,
+                    url = activityContent.url,
+                    description = activityContent.description
+                )
+            )
+        }
     }
 
     private fun share() {
@@ -90,24 +101,5 @@ class ArticleDetailActivity : AppCompatActivity(), MenuItem.OnMenuItemClickListe
             type = "text/plain"
         }
         startActivity(Intent.createChooser(shareIntent, "Share this Article"))
-    }
-
-    private class InsertionDBAsyncTask(
-        private val context: Context,
-        private val dbContent: Articles
-    ) :
-        AsyncTask<Void?, Void?, Int>() {
-        override fun doInBackground(vararg params: Void?): Int {
-            val dbInstance = AppDB.getDbInstance(context)
-            dbInstance.articlesDao().insertAll(
-                ArticlesEntity(
-                    title = dbContent.title,
-                    urlToImage = dbContent.urlToImage,
-                    url = dbContent.url,
-                    description = dbContent.description
-                )
-            )
-            return 0;
-        }
     }
 }
